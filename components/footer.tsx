@@ -1,71 +1,105 @@
-"use client";
-
-import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { GitHubLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
+import { Github, Twitter } from "lucide-react";
 
-const Footer = () => {
-  const year = new Date().getFullYear();
-
-  const socialLinks = [
-    {
-      name: "Twitter",
-      href: "https://x.com/gonzalochale",
-      icon: TwitterLogoIcon,
-    },
-    {
-      name: "GitHub",
-      href: "https://github.com/gonzalochale",
-      icon: GitHubLogoIcon,
-    },
-  ];
-
+export default function Footer() {
   return (
-    <footer className="w-full bg-card">
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col items-center text-center space-y-6"
-        >
-          <Link
-            href="/"
-            className="text-xl font-medium hover:opacity-80 transition-opacity"
-          >
-            Acme
-          </Link>
-          <div className="flex space-x-3">
-            {socialLinks.map((social) => (
-              <Button
-                key={social.name}
-                asChild
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8 rounded-full hover:bg-muted/50"
+    <footer className="py-12 px-4 md:px-8 bg-muted/30">
+      <div className="max-w-(--breakpoint-xl) mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          {/* Brand */}
+          <div className="md:col-span-2">
+            <h3 className="text-xl font-semibold mb-2">PriceWatch</h3>
+            <p className="text-sm text-muted-foreground max-w-sm">
+              Open-source e-commerce price tracker powered by Thor Data proxies.
+              Track competitor prices with 98%+ success rate.
+            </p>
+            <div className="flex gap-4 mt-4">
+              <Link
+                href="https://github.com"
+                target="_blank"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                <Link
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.name}
-                >
-                  <social.icon className="h-4 w-4" />
+                <Github className="w-5 h-5" />
+              </Link>
+              <Link
+                href="https://twitter.com"
+                target="_blank"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Twitter className="w-5 h-5" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Product */}
+          <div>
+            <h4 className="font-medium mb-3">Product</h4>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+
+              <li>
+                <Link href="#how-it-works" className="hover:text-foreground transition-colors">
+                  How It Works
                 </Link>
-              </Button>
-            ))}
+              </li>
+              <li>
+                <Link href="#faq" className="hover:text-foreground transition-colors">
+                  FAQ
+                </Link>
+              </li>
+            </ul>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-2 text-sm text-muted-foreground">
-            <span>© {year} Acme</span>
-            <span className="hidden sm:inline">•</span>
-            <span className="font-medium">#BuildingInPublic</span>
+
+          {/* Resources */}
+          <div>
+            <h4 className="font-medium mb-3">Resources</h4>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li>
+                <Link
+                  href="https://github.com"
+                  target="_blank"
+                  className="hover:text-foreground transition-colors"
+                >
+                  GitHub
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://thordata.com"
+                  target="_blank"
+                  className="hover:text-foreground transition-colors"
+                >
+                  Thor Data
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/docs"
+                  className="hover:text-foreground transition-colors"
+                >
+                  API Docs
+                </Link>
+              </li>
+            </ul>
           </div>
-        </motion.div>
+        </div>
+
+        <Separator className="mb-6" />
+
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+          <p>© {new Date().getFullYear()} PriceWatch. MIT License.</p>
+          <p className="flex items-center gap-1">
+            Powered by{" "}
+            <Link
+              href="https://thordata.com"
+              target="_blank"
+              className="underline hover:text-foreground transition-colors"
+            >
+              Thor Data
+            </Link>
+          </p>
+        </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

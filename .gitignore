@@ -27,6 +27,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
@@ -34,3 +35,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Agent skills (internal tooling)
+.agent/
+
+# Firebase credentials (NEVER commit these)
+firebase-credentials.json
+*-firebase-adminsdk-*.json
+
+# Backend sensitive files
+backend/.env
+backend/.env.local
+backend/firebase-credentials.json
+backend/venv/
