@@ -114,10 +114,16 @@ export default function Home() {
 
 
       {/* Hero Section with URL Input */}
-      <section className="py-16 md:py-24 border-b border-border/40">
+      <section className="relative py-16 md:py-24 border-b border-border/40">
+        {/* Blue glow background effect */}
+        <div className="w-full h-full absolute -top-32 flex justify-end items-center pointer-events-none overflow-hidden">
+          <div className="w-3/4 flex justify-center items-center">
+            <div className="w-12 h-[600px] bg-light blur-[70px] rounded-3xl max-sm:rotate-15 sm:rotate-35 will-change-transform"></div>
+          </div>
+        </div>
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Track prices. <span className="text-emerald-500">Save money.</span>
+            Track product prices on <span className="text-light">Amazon and Walmart.</span>
           </h1>
           <p className="text-lg text-muted-foreground mb-8">
             Paste any Amazon or Walmart product URL to start tracking its price.
@@ -132,13 +138,13 @@ export default function Home() {
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="Paste Amazon or Walmart product URL..."
-                className="w-full h-14 pl-12 pr-4 rounded-xl border border-border bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500"
+                className="w-full h-14 pl-12 pr-4 rounded-xl border border-border bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-light/50 focus:border-light"
               />
             </div>
             <Button
               type="submit"
               disabled={isAdding || !url.trim()}
-              className="h-14 px-8 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-medium"
+              className="h-14 px-8 rounded-xl bg-light hover:bg-light/90 text-white font-medium"
             >
               {isAdding ? (
                 <>
@@ -175,7 +181,7 @@ export default function Home() {
                 <span className="text-muted-foreground ml-2">Products</span>
               </div>
               <div>
-                <span className="text-2xl font-bold text-emerald-500">{scrapeSuccess}%</span>
+                <span className="text-2xl font-bold text-light">{scrapeSuccess}%</span>
                 <span className="text-muted-foreground ml-2">Success Rate</span>
               </div>
             </div>
@@ -217,7 +223,7 @@ export default function Home() {
                           {formatPrice(product.current_price, product.currency)}
                         </span>
                         {product.price_change !== undefined && product.price_change !== 0 && (
-                          <span className={`ml-2 text-sm inline-flex items-center ${product.price_change < 0 ? "text-emerald-500" : "text-red-500"}`}>
+                          <span className={`ml-2 text-sm inline-flex items-center ${product.price_change < 0 ? "text-light" : "text-red-500"}`}>
                             {product.price_change < 0 ? <TrendingDown className="w-3 h-3 mr-1" /> : <TrendingUp className="w-3 h-3 mr-1" />}
                             {Math.abs(product.price_change)}%
                           </span>

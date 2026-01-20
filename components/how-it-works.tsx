@@ -23,7 +23,7 @@ const steps = [
         icon: Zap,
         title: "We Scrape Securely",
         description:
-            "Thor Data residential proxies bypass anti-bot systems. 98% success rate, zero blocks.",
+            "High-quality residential proxies bypass anti-bot systems. 98% success rate, zero blocks.",
         color: "text-amber-500",
         bgColor: "bg-amber-500/10",
     },
@@ -60,8 +60,8 @@ export default function HowItWorks() {
                         How It Works
                     </h2>
                     <p className="text-muted-foreground max-w-2xl mx-auto">
-                        Start tracking competitor prices in under 60 seconds. No complex setup,
-                        no coding required.
+                        Learn how to track competitor prices using production-grade scraping techniques.
+                        Open source and easy to deploy.
                     </p>
                 </motion.div>
 

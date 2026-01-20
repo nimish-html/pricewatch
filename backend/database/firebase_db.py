@@ -8,6 +8,7 @@ Collections:
 """
 from __future__ import annotations
 
+import os
 import firebase_admin
 from firebase_admin import credentials, firestore
 from datetime import datetime
@@ -46,11 +47,11 @@ def init_firebase() -> None:
     
     settings = get_settings()
     
-    # Option 1: Use file path to service account JSON
-    if settings.google_application_credentials:
+    # Option 1: Use file path to service account JSON (only if file exists)
+    if settings.google_application_credentials and os.path.exists(settings.google_application_credentials):
         cred = credentials.Certificate(settings.google_application_credentials)
         firebase_admin.initialize_app(cred)
-    # Option 2: Use inline JSON credentials
+    # Option 2: Use inline JSON credentials (for cloud deployments like Fly.io)
     elif creds := settings.get_firebase_credentials():
         cred = credentials.Certificate(creds)
         firebase_admin.initialize_app(cred)

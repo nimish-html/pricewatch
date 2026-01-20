@@ -11,8 +11,8 @@ export default function Footer() {
           <div className="md:col-span-2">
             <h3 className="text-xl font-semibold mb-2">PriceWatch</h3>
             <p className="text-sm text-muted-foreground max-w-sm">
-              Open-source e-commerce price tracker powered by Thor Data proxies.
-              Track competitor prices with 98%+ success rate.
+              Open-source e-commerce price tracker.
+              Track competitor prices with 98%+ success rate using residential proxies.
             </p>
             <div className="flex gap-4 mt-4">
               <Link
@@ -63,15 +63,7 @@ export default function Footer() {
                   GitHub
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="https://thordata.com"
-                  target="_blank"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Thor Data
-                </Link>
-              </li>
+
               <li>
                 <Link
                   href="/docs"
@@ -88,16 +80,7 @@ export default function Footer() {
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} PriceWatch. MIT License.</p>
-          <p className="flex items-center gap-1">
-            Powered by{" "}
-            <Link
-              href="https://thordata.com"
-              target="_blank"
-              className="underline hover:text-foreground transition-colors"
-            >
-              Thor Data
-            </Link>
-          </p>
+
         </div>
       </div>
     </footer>

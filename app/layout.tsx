@@ -9,8 +9,8 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "SaaS Landing Template",
-  description: "Landing Page template.",
+  title: "PriceWatch - Track Product Prices on Amazon and Walmart",
+  description: "Open source price tracker for Amazon and Walmart. Built to demonstrate production-grade scraping techniques.",
 };
 
 export default function RootLayout({

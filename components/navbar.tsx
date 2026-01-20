@@ -44,7 +44,7 @@ export default function NavBar() {
           {/* Mobile logo */}
           <div className="flex sm:hidden">
             <Link href="/" className="flex items-center gap-2 font-semibold text-lg">
-              <TrendingDown className="w-5 h-5 text-emerald-500" />
+              <TrendingDown className="w-5 h-5 text-light" />
               PriceWatch
             </Link>
           </div>
@@ -52,7 +52,7 @@ export default function NavBar() {
           {/* Desktop nav */}
           <div className="hidden sm:flex items-center space-x-8">
             <Link href="/" className="flex items-center gap-2 font-semibold text-xl">
-              <TrendingDown className="w-6 h-6 text-emerald-500" />
+              <TrendingDown className="w-6 h-6 text-light" />
               PriceWatch
             </Link>
 

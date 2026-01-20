@@ -48,3 +48,8 @@ backend/.env
 backend/.env.local
 backend/firebase-credentials.json
 backend/venv/
+
+# Firebase
+.firebase/
+functions/__pycache__/
+functions/venv/

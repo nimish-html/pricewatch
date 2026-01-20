@@ -80,7 +80,7 @@ def detect_platform(url: str) -> str:
 
 # ============== Endpoints ==============
 
-@router.post("/", response_model=ProductResponse, status_code=201)
+@router.post("", response_model=ProductResponse, status_code=201)
 async def create_product(data: ProductCreate):
     """
     Add a new product to track.
@@ -112,7 +112,7 @@ async def create_product(data: ProductCreate):
     return product
 
 
-@router.get("/", response_model=ProductListResponse)
+@router.get("", response_model=ProductListResponse)
 async def list_products(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),

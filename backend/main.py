@@ -21,15 +21,21 @@ async def lifespan(app: FastAPI):
     Application lifespan handler.
     
     - Initialize Firebase on startup
+    - Start background scheduler for automatic price tracking
     - Clean up on shutdown
     """
     # Startup
     init_firebase()
     print("✓ Firebase initialized")
     
+    # Start background scheduler for automatic price tracking
+    from scheduler import start_scheduler, stop_scheduler
+    start_scheduler()
+    
     yield
     
     # Shutdown
+    stop_scheduler()
     print("✓ Shutting down...")
 
 
@@ -80,6 +86,29 @@ async def health_check():
             "proxy_configured": bool(settings.thor_proxy_username),
             "web_unlocker_configured": bool(settings.thor_webunlocker_token),
         }
+    }
+
+
+@app.get("/scheduler", tags=["health"])
+async def scheduler_status():
+    """Get background scheduler status."""
+    from scheduler import get_scheduler
+    
+    scheduler = get_scheduler()
+    if scheduler is None:
+        return {"status": "not_running", "jobs": []}
+    
+    jobs = []
+    for job in scheduler.get_jobs():
+        jobs.append({
+            "id": job.id,
+            "name": job.name,
+            "next_run": job.next_run_time.isoformat() if job.next_run_time else None,
+        })
+    
+    return {
+        "status": "running",
+        "jobs": jobs,
     }
 
 

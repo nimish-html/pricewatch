@@ -12,7 +12,7 @@ const faqItems = [
   {
     question: "How does PriceWatch track prices without getting blocked?",
     answer:
-      "We use Thor Data's residential proxy network with 60+ million IPs worldwide. These are real residential IPs, not datacenter IPs, which makes our requests indistinguishable from normal users. Combined with intelligent fingerprinting and rate limiting, we achieve a 98%+ success rate.",
+      "We use high-quality residential proxies with sticky sessions. These are real residential IPs, not datacenter IPs, which makes our requests indistinguishable from normal users. Combined with intelligent fingerprinting and rate limiting, we achieve a 98%+ success rate.",
   },
   {
     question: "Which e-commerce platforms do you support?",
@@ -27,18 +27,14 @@ const faqItems = [
   {
     question: "Is PriceWatch really free and open-source?",
     answer:
-      "Yes! The entire codebase is MIT licensed on GitHub. You can self-host it with your own Thor Data credentials. We may offer a managed cloud version in the future for users who don't want to self-host.",
+      "Yes! The entire codebase is MIT licensed on GitHub. You can self-host it with your own proxy credentials. We may offer a managed cloud version in the future for users who don't want to self-host.",
   },
   {
     question: "What data do you collect?",
     answer:
       "We only collect and store: product URLs you add, historical price data, and scraping logs. No personal data, no tracking, no ads. When self-hosting, all data stays on your own infrastructure.",
   },
-  {
-    question: "How do I get started with Thor Data proxies?",
-    answer:
-      "Sign up at thordata.com and get your API credentials. Thor Data offers a free trial so you can test PriceWatch before committing. Our setup docs walk you through the 5-minute configuration.",
-  },
+
 ];
 
 export default function Faq() {

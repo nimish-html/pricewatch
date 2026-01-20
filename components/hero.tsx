@@ -28,7 +28,7 @@ export default function Hero() {
           className="flex flex-col justify-center items-center space-y-5 max-w-4xl mx-auto text-center"
         >
           <span className="w-fit h-full text-sm bg-card px-3 py-1.5 border border-border rounded-full flex items-center gap-2">
-            <TrendingDown className="w-4 h-4 text-emerald-500" />
+            <TrendingDown className="w-4 h-4 text-light" />
             Open Source Price Intelligence
           </span>
           <h1 className="text-4xl font-medium tracking-tighter mx-auto md:text-6xl text-pretty bg-linear-to-b from-sky-800 dark:from-sky-100 to-foreground dark:to-foreground bg-clip-text text-transparent">
@@ -60,7 +60,7 @@ export default function Hero() {
                   <DialogTitle>PriceWatch Demo</DialogTitle>
                   <DialogDescription>
                     See how PriceWatch monitors competitor prices across e-commerce
-                    platforms using Thor Data&apos;s residential proxies for 98%+
+                    platforms using residential proxies for 98%+
                     success rates.
                   </DialogDescription>
                 </DialogHeader>
@@ -87,22 +87,22 @@ export default function Hero() {
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 w-full max-w-3xl"
         >
           <FeatureCard
-            icon={<TrendingDown className="w-5 h-5 text-emerald-500" />}
+            icon={<TrendingDown className="w-5 h-5 text-light" />}
             title="Price Tracking"
             description="30-day history"
           />
           <FeatureCard
-            icon={<Bell className="w-5 h-5 text-amber-500" />}
+            icon={<Bell className="w-5 h-5 text-light" />}
             title="Price Alerts"
             description="Instant notifications"
           />
           <FeatureCard
-            icon={<ShieldCheck className="w-5 h-5 text-blue-500" />}
+            icon={<ShieldCheck className="w-5 h-5 text-light" />}
             title="Anti-Detection"
             description="98%+ success rate"
           />
           <FeatureCard
-            icon={<DollarSign className="w-5 h-5 text-purple-500" />}
+            icon={<DollarSign className="w-5 h-5 text-light" />}
             title="Multi-Platform"
             description="Amazon, Walmart +"
           />
@@ -117,7 +117,7 @@ export default function Hero() {
         className="w-full h-full absolute -top-32 flex justify-end items-center pointer-events-none "
       >
         <div className="w-3/4 flex justify-center items-center">
-          <div className="w-12 h-[600px] bg-emerald-500/20 blur-[100px] rounded-3xl max-sm:rotate-15 sm:rotate-35 will-change-transform"></div>
+          <div className="w-12 h-[600px] bg-light blur-[70px] rounded-3xl max-sm:rotate-15 sm:rotate-35 will-change-transform"></div>
         </div>
       </motion.div>
     </div>
