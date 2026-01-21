@@ -12,7 +12,6 @@ import {
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -97,6 +96,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
         }
     };
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         loadProduct();
         loadPriceHistory();
@@ -425,7 +425,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                                 <DialogHeader>
                                     <DialogTitle>Set Price Alert</DialogTitle>
                                     <CardDescription>
-                                        We'll notify you when the price drops below your target.
+                                        We&apos;ll notify you when the price drops below your target.
                                     </CardDescription>
                                 </DialogHeader>
                                 <div className="space-y-4 py-4">
@@ -452,7 +452,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                                             placeholder="you@example.com"
                                         />
                                         <p className="text-xs text-muted-foreground">
-                                            We'll only email you when a meaningful price drop occurs.
+                                            We&apos;ll only email you when a meaningful price drop occurs.
                                         </p>
                                     </div>
                                 </div>
