@@ -69,7 +69,7 @@ export default function Hero() {
                 </div>
                 <DialogFooter>
                   <Button asChild size="sm">
-                    <Link href="https://github.com" target="_blank">
+                    <Link href="https://github.com/nimish-html/pricewatch" target="_blank">
                       View on GitHub
                     </Link>
                   </Button>

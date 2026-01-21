@@ -224,4 +224,4 @@ MIT License — see [LICENSE](license.txt) for details.
 
 ---
 
-**Built with ❤️ for the web scraping community**
+**Built with ❤️**

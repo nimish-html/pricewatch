@@ -16,7 +16,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-4 mt-4">
               <Link
-                href="https://github.com"
+                href="https://github.com/nimish-html/pricewatch"
                 target="_blank"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
@@ -56,7 +56,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <Link
-                  href="https://github.com"
+                  href="https://github.com/nimish-html/pricewatch"
                   target="_blank"
                   className="hover:text-foreground transition-colors"
                 >
