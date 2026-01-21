@@ -109,6 +109,8 @@ class ProductDB:
             "lowest_price": data.get("lowest_price"),
             "highest_price": data.get("highest_price"),
             "scrape_frequency_hours": data.get("scrape_frequency_hours", 24),
+            "alert_email": data.get("alert_email"),
+            "last_alert_sent_at": None,
             "last_scraped_at": None,
             "created_at": now,
             "updated_at": now,

@@ -1,55 +1,44 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-.yarn/install-state.gz
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# local env files
-.env*.local
-.env
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
 
 # Agent skills (internal tooling)
-.agent/
-
-# Firebase credentials (NEVER commit these)
-firebase-credentials.json
-*-firebase-adminsdk-*.json
-
 # Backend sensitive files
+# Firebase
+# Firebase credentials (NEVER commit these)
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# debug
+# dependencies
+# local env files
+# misc
+# next.js
+# production
+# testing
+# typescript
+# vercel
+*-firebase-adminsdk-*.json
+*.pem
+*.tsbuildinfo
+.DS_Store
+.agent/
+.env
+.env*.local
+.firebase/
+.pnp.js
+.vercel
+.yarn/install-state.gz
+/.next/
+/.pnp
+/build
+/coverage
+/node_modules
+/out/
 backend/.env
 backend/.env.local
 backend/firebase-credentials.json
 backend/venv/
-
-# Firebase
-.firebase/
+docs/
+firebase-credentials.json
 functions/__pycache__/
 functions/venv/
+next-env.d.ts
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

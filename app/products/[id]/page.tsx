@@ -10,6 +10,15 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
+import {
     ArrowLeft,
     RefreshCw,
     ExternalLink,
@@ -22,7 +31,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Product, fetchProduct, triggerScrape, fetchPriceHistory, exportPriceHistory, deleteProduct, PriceHistoryResponse } from "@/lib/api";
+import { Product, fetchProduct, triggerScrape, fetchPriceHistory, exportPriceHistory, deleteProduct, updateProduct, PriceHistoryResponse } from "@/lib/api";
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const resolvedParams = use(params);
@@ -34,16 +43,48 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     const [isDeleting, setIsDeleting] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    // Alert Dialog State
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [isSavingAlert, setIsSavingAlert] = useState(false);
+    const [alertPrice, setAlertPrice] = useState("");
+    const [alertEmail, setAlertEmail] = useState("");
+
     const loadProduct = async () => {
         try {
             setIsLoading(true);
             setError(null);
             const data = await fetchProduct(resolvedParams.id);
             setProduct(data);
+            // Initialize alert form
+            if (data) {
+                setAlertPrice(data.price_alert_threshold?.toString() || "");
+                setAlertEmail(data.alert_email || "");
+            }
         } catch (err) {
             setError(err instanceof Error ? err.message : "Failed to load product");
         } finally {
             setIsLoading(false);
+        }
+    };
+
+    const handleSaveAlert = async () => {
+        setIsSavingAlert(true);
+        try {
+            const price = alertPrice ? parseFloat(alertPrice) : null;
+            const email = alertEmail || null;
+
+            await updateProduct(resolvedParams.id, {
+                price_alert_threshold: price,
+                alert_email: email,
+            });
+
+            await loadProduct();
+            setIsAlertOpen(false);
+        } catch (err) {
+            console.error("Failed to save alert:", err);
+            alert("Failed to save alert settings");
+        } finally {
+            setIsSavingAlert(false);
         }
     };
 
@@ -368,10 +409,62 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                                     </span>
                                 ) : null}
                             </div>
+                            {product.alert_email && (
+                                <p className="text-xs text-muted-foreground mt-1">
+                                    Alerts sent to: <span className="font-medium">{product.alert_email}</span>
+                                </p>
+                            )}
                         </div>
-                        <Button variant="outline" size="sm">
-                            Edit Alert
-                        </Button>
+                        <Dialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
+                            <DialogTrigger asChild>
+                                <Button variant="outline" size="sm">
+                                    {product.price_alert_threshold ? "Edit Alert" : "Set Alert"}
+                                </Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Set Price Alert</DialogTitle>
+                                    <CardDescription>
+                                        We'll notify you when the price drops below your target.
+                                    </CardDescription>
+                                </DialogHeader>
+                                <div className="space-y-4 py-4">
+                                    <div className="space-y-2">
+                                        <label htmlFor="price" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Target Price ({product.currency})</label>
+                                        <input
+                                            id="price"
+                                            type="number"
+                                            step="0.01"
+                                            value={alertPrice}
+                                            onChange={(e) => setAlertPrice(e.target.value)}
+                                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                            placeholder="Example: 25.00"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label htmlFor="email" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Email Address</label>
+                                        <input
+                                            id="email"
+                                            type="email"
+                                            value={alertEmail}
+                                            onChange={(e) => setAlertEmail(e.target.value)}
+                                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                            placeholder="you@example.com"
+                                        />
+                                        <p className="text-xs text-muted-foreground">
+                                            We'll only email you when a meaningful price drop occurs.
+                                        </p>
+                                    </div>
+                                </div>
+                                <DialogFooter>
+                                    <Button variant="outline" onClick={() => setIsAlertOpen(false)}>Cancel</Button>
+                                    <Button onClick={handleSaveAlert} disabled={isSavingAlert}>
+                                        {isSavingAlert && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                                        Save Alert
+                                    </Button>
+                                </DialogFooter>
+                            </DialogContent>
+                        </Dialog>
                     </div>
                 </CardContent>
             </Card>

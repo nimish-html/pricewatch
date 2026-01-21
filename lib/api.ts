@@ -20,10 +20,12 @@ export interface Product {
     review_count: number | null;
     seller_name: string | null;
     price_alert_threshold: number | null;
+    alert_email: string | null;
     lowest_price: number | null;
     highest_price: number | null;
     scrape_frequency_hours: number;
     last_scraped_at: string | null;
+    last_alert_sent_at: string | null;
     created_at: string;
     is_active: boolean;
 }
@@ -122,6 +124,7 @@ export async function addProduct(
     url: string,
     options?: {
         price_alert_threshold?: number;
+        alert_email?: string;
         scrape_frequency_hours?: number;
     }
 ): Promise<Product> {
@@ -137,7 +140,8 @@ export async function addProduct(
 export async function updateProduct(
     id: string,
     data: {
-        price_alert_threshold?: number;
+        price_alert_threshold?: number | null;
+        alert_email?: string | null;
         scrape_frequency_hours?: number;
         is_active?: boolean;
     }

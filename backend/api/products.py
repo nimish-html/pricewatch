@@ -21,12 +21,14 @@ class ProductCreate(BaseModel):
     """Request body for creating a product."""
     url: HttpUrl
     price_alert_threshold: Optional[float] = None
+    alert_email: Optional[str] = None
     scrape_frequency_hours: int = 24
 
 
 class ProductUpdate(BaseModel):
     """Request body for updating a product."""
     price_alert_threshold: Optional[float] = None
+    alert_email: Optional[str] = None
     scrape_frequency_hours: Optional[int] = None
     is_active: Optional[bool] = None
 
@@ -45,10 +47,12 @@ class ProductResponse(BaseModel):
     review_count: Optional[int]
     seller_name: Optional[str]
     price_alert_threshold: Optional[float]
+    alert_email: Optional[str]
     lowest_price: Optional[float]
     highest_price: Optional[float]
     scrape_frequency_hours: int
     last_scraped_at: Optional[datetime]
+    last_alert_sent_at: Optional[datetime]
     created_at: datetime
     is_active: bool
 
@@ -106,6 +110,7 @@ async def create_product(data: ProductCreate):
         "url": url_str,
         "platform": platform,
         "price_alert_threshold": data.price_alert_threshold,
+        "alert_email": data.alert_email,
         "scrape_frequency_hours": data.scrape_frequency_hours,
     })
     
@@ -160,6 +165,8 @@ async def update_product(product_id: str, data: ProductUpdate):
     update_data = {}
     if data.price_alert_threshold is not None:
         update_data["price_alert_threshold"] = data.price_alert_threshold
+    if data.alert_email is not None:
+        update_data["alert_email"] = data.alert_email
     if data.scrape_frequency_hours is not None:
         update_data["scrape_frequency_hours"] = data.scrape_frequency_hours
     if data.is_active is not None:

@@ -77,6 +77,54 @@ def hourly_price_tracker(event: scheduler_fn.ScheduledEvent) -> None:
                 if data.get("success"):
                     successful += 1
                     logger.info(f"✓ Scraped {product.get('name', product_id)}: ${data.get('current_price')}")
+                    
+                    # --- Price Alert Logic ---
+                    current_price = data.get('current_price')
+                    alert_threshold = product.get('price_alert_threshold')
+                    alert_email = product.get('alert_email')
+                    
+                    if current_price and alert_threshold and alert_email and current_price <= alert_threshold:
+                        # Check cooldown (24h) to avoid spam
+                        last_alert = product.get('last_alert_sent_at')
+                        if hasattr(last_alert, 'timestamp'):
+                            last_alert = datetime.fromtimestamp(last_alert.timestamp())
+                        
+                        # Send if never sent or > 24h ago
+                        if not last_alert or (now - last_alert) > timedelta(hours=24):
+                            try:
+                                # Create email document
+                                product_name = product.get('name') or 'Tracked Product'
+                                product_url = product.get('url')
+                                currency = product.get('currency', '$')
+                                
+                                db.collection("mail").add({
+                                    "to": alert_email,
+                                    "message": {
+                                        "subject": f"⬇️ Price Drop: {product_name} is now {currency}{current_price}",
+                                        "html": f"""
+                                        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+                                            <h2 style="color: #10b981;">Good news! A price you're watching has dropped.</h2>
+                                            <p><strong>{product_name}</strong> is now available for <strong>{currency}{current_price}</strong>.</p>
+                                            <p>Your target price was: {currency}{alert_threshold}</p>
+                                            <div style="margin: 20px 0;">
+                                                <a href="{product_url}" style="background-color: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">View Deal</a>
+                                            </div>
+                                            <p style="font-size: 12px; color: #666;">
+                                                You received this because you set a price alert on PriceWatch.
+                                                We won't email you about this product again for at least 24 hours.
+                                            </p>
+                                        </div>
+                                        """
+                                    }
+                                })
+                                
+                                # Update last_alert_sent_at
+                                doc.reference.update({"last_alert_sent_at": now})
+                                logger.info(f"📧 Sent alert to {alert_email} for {product_id}")
+                                
+                            except Exception as e:
+                                logger.error(f"✗ Failed to send alert for {product_id}: {e}")
+                    # -------------------------
                 else:
                     failed += 1
                     logger.warning(f"✗ Scrape failed for {product_id}: {data.get('error_message')}")

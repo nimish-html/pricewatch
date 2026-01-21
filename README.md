@@ -16,6 +16,7 @@ Track prices across Amazon (all regions) and Walmart. Get notified when prices d
 - **98% Success Rate** — Residential proxies + Web Unlocker fallback
 - **Real-Time Tracking** — Add products via URL, get live price updates
 - **Price History** — 30-day charts with high/low tracking
+- **Email Price Alerts** — Get notified when prices drop below your target
 - **Anti-Detection Built-In** — Proxy rotation, randomized delays, session persistence
 - **Beautiful Dashboard** — Next.js 15 + shadcn/ui with dark mode
 - **Fully Open Source** — Learn from production-grade scraping code
@@ -132,11 +133,6 @@ This project implements production-grade anti-bot bypass:
 
 Datacenter proxies get blocked almost immediately on Amazon/Walmart. Residential proxies route through real ISPs, making requests indistinguishable from normal users.
 
-**My testing results:**
-- Free proxies: ~5% success rate
-- Datacenter proxies: ~20% success rate  
-- Residential proxies: **98% success rate**
-
 ---
 
 ## 📁 Project Structure
@@ -207,8 +203,9 @@ Contributions welcome! Areas where help is needed:
 
 - [ ] Add Target.com scraper
 - [ ] Add eBay scraper
-- [ ] Add email/Slack price alerts
+- [x] ~~Add email/Slack price alerts~~ ✅ Done!
 - [ ] Add price prediction ML model
+- [ ] Add Telegram bot notifications
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
@@ -224,7 +221,6 @@ MIT License — see [LICENSE](license.txt) for details.
 
 - [Thor Data](https://thordata.com) for residential proxy infrastructure
 - [shadcn/ui](https://ui.shadcn.com) for beautiful UI components
-- r/webscraping community for inspiration
 
 ---
 
