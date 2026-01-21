@@ -46,7 +46,7 @@ Track prices across Amazon (all regions) and Walmart. Get notified when prices d
 ┌────────────────────────▼────────────────────────────────────┐
 │                   External Services                          │
 │  ┌─────────────┬─────────────┬────────────────────────┐     │
-│  │ Thor Data   │ Thor Data   │ Firebase               │     │
+│  │ Thordata    │ Thordata    │ Firebase               │     │
 │  │ Residential │ Web Unlocker│ Firestore              │     │
 │  │ Proxies     │             │                        │     │
 │  └─────────────┴─────────────┴────────────────────────┘     │
@@ -61,7 +61,7 @@ Track prices across Amazon (all regions) and Walmart. Get notified when prices d
 
 - Node.js 18+
 - Python 3.11+
-- [Thor Data](https://thordata.com) account (for proxies)
+- [Thordata](https://www.thordata.com/?ls=Reddit&lk=sh) account (for proxies)
 - Firebase project (for database)
 
 ### 1. Clone & Install
@@ -93,11 +93,11 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 GOOGLE_APPLICATION_CREDENTIALS=./firebase-credentials.json
 FIREBASE_PROJECT_ID=your-project-id
 
-# Thor Data Residential Proxies
+# Thordata Residential Proxies
 THOR_PROXY_USERNAME=td-customer-YOUR_USERNAME
 THOR_PROXY_PASSWORD=YOUR_PASSWORD
 
-# Thor Data Web Unlocker (optional, for complex sites)
+# Thordata Web Unlocker (optional, for complex sites)
 THOR_WEBUNLOCKER_TOKEN=YOUR_TOKEN
 ```
 
@@ -122,7 +122,7 @@ This project implements production-grade anti-bot bypass:
 
 | Technique | Description |
 |-----------|-------------|
-| **Residential Proxies** | Thor Data rotating IPs that appear as real users |
+| **Residential Proxies** | Thordata rotating IPs that appear as real users |
 | **Sticky Sessions** | Same IP for 5-10 requests to mimic human browsing |
 | **Randomized Delays** | 1-3 second jitter between requests |
 | **Web Unlocker Fallback** | Automatic CAPTCHA solving when blocked |
@@ -219,7 +219,7 @@ MIT License — see [LICENSE](license.txt) for details.
 
 ## 🙏 Acknowledgments
 
-- [Thor Data](https://thordata.com) for residential proxy infrastructure
+- [Thordata](https://www.thordata.com/?ls=Reddit&lk=sh) for residential proxy infrastructure
 - [shadcn/ui](https://ui.shadcn.com) for beautiful UI components
 
 ---
