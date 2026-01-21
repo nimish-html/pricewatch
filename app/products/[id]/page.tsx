@@ -291,20 +291,36 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 </CardHeader>
                 <CardContent>
                     {priceHistory && priceHistory.history.length > 0 ? (
-                        <div className="h-64 flex items-end gap-1 px-4">
-                            {priceHistory.history.slice(-30).map((point, i) => {
-                                const maxPrice = Math.max(...priceHistory.history.map(p => p.price));
-                                const height = (point.price / maxPrice) * 100;
-                                return (
-                                    <div key={i} className="flex-1 flex flex-col items-center gap-1">
-                                        <div
-                                            className="w-full bg-emerald-500/50 hover:bg-emerald-500 transition-colors rounded-t"
-                                            style={{ height: `${height * 2}px` }}
-                                            title={`${formatPrice(point.price, product.currency)} on ${new Date(point.recorded_at).toLocaleDateString()}`}
-                                        />
+                        <div className="space-y-2">
+                            <div className="h-48 flex items-end gap-1 px-4">
+                                {priceHistory.history.slice(-30).map((point, i) => {
+                                    const maxPrice = Math.max(...priceHistory.history.map(p => p.price));
+                                    const minPrice = Math.min(...priceHistory.history.map(p => p.price));
+                                    const range = maxPrice - minPrice || 1;
+                                    const height = ((point.price - minPrice) / range) * 100;
+                                    return (
+                                        <div key={i} className="flex-1 flex flex-col items-center gap-1 group relative">
+                                            {/* Tooltip on hover */}
+                                            <div className="absolute bottom-full mb-2 hidden group-hover:block bg-popover border border-border rounded-lg px-3 py-2 shadow-lg z-10 whitespace-nowrap">
+                                                <p className="text-sm font-semibold">{formatPrice(point.price, product.currency)}</p>
+                                                <p className="text-xs text-muted-foreground">{new Date(point.recorded_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</p>
+                                            </div>
+                                            <div
+                                                className="w-full bg-emerald-500/50 hover:bg-emerald-500 transition-colors rounded-t cursor-pointer"
+                                                style={{ height: `${Math.max(height * 1.5, 8)}px` }}
+                                            />
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                            {/* Date labels - show every 5th date for readability */}
+                            <div className="flex gap-1 px-4 text-[10px] text-muted-foreground">
+                                {priceHistory.history.slice(-30).map((point, i) => (
+                                    <div key={i} className="flex-1 text-center">
+                                        {i % 7 === 0 ? new Date(point.recorded_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : ''}
                                     </div>
-                                );
-                            })}
+                                ))}
+                            </div>
                         </div>
                     ) : (
                         <div className="h-64 bg-muted/30 rounded-lg flex items-center justify-center">
